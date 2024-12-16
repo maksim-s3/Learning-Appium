@@ -17,20 +17,9 @@ def driver(request):
 
 
 @pytest.fixture(scope="session")
-def not_run_application(driver, request):
-    # Закрываем приложение если оно осталось активным с прошлого теста
-    driver.terminate_app("ru.dns.shop.android")
+def clear_app(driver):
     # Удаляем сохраненные данные приложения
     driver.execute_script("mobile: clearApp", {'appId': "ru.dns.shop.android"})
-    # Запускаем приложение
-    driver.activate_app("ru.dns.shop.android")
-
-    def finalizer():
-        # Закрываем приложение после теста
-        driver.terminate_app("ru.dns.shop.android")
-
-    request.addfinalizer(finalizer)
-    yield
 
 
 @pytest.fixture(scope="session")
@@ -49,7 +38,7 @@ def application(driver, request):
 
 
 class TestAppium:
-    def test_first_run_application(self, not_run_application):
+    def test_first_run_application(self, clear_app, application):
         with allure.step("Выбрать город из параметра"):
             city = "Уфа"
             assert pages.select_city_page.is_open
