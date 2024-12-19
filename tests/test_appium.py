@@ -44,6 +44,21 @@ def application(driver, request):
 
 
 @pytest.fixture(scope="session")
+def chrome_application(driver, request):
+    # Закрываем приложение если оно осталось активным с прошлого теста
+    driver.terminate_app("com.android.chrome")
+    # Запускаем приложение
+    driver.activate_app("com.android.chrome")
+
+    def finalizer():
+        # Закрываем приложение после теста
+        driver.terminate_app("com.android.chrome")
+
+    request.addfinalizer(finalizer)
+    yield
+
+
+@pytest.fixture(scope="session")
 def grant_all_permissions(driver):
     # Выдаем все разрешения приложению
     driver.execute_script("mobile: changePermissions", {'permissions': 'all', 'appPackage': "ru.dns.shop.android"})
@@ -144,3 +159,17 @@ class TestAppium:
             assert not pages.cart_page.find_product_in_cart(product_name)
             pages.cart_page.wait_snack_bar()
             assert pages.cart_page.is_empty
+
+    def test_switch_between_applications(self, driver, application, chrome_application):
+        driver.activate_app("ru.dns.shop.android")
+        assert pages.main_page.is_open
+        driver.background_app(-1)
+
+        driver.activate_app("com.android.chrome")
+        time.sleep(5)
+        search_box = driver.find_element(By.XPATH, "//*[contains(@resource-id, 'search_box_text')]")
+        assert search_box.is_displayed()
+        driver.background_app(-1)
+
+        driver.activate_app("ru.dns.shop.android")
+        assert pages.main_page.is_open
