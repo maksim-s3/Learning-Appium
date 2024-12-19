@@ -8,12 +8,12 @@ logger = logging.getLogger(__name__)
 
 
 class FavoritesPage(BasePage):
-    _empty_content_locator = '//*[contains(@resource-id, "empty_content_view")]'
-    _button_login_locator = '//*[contains(@resource-id, "login_button")]'
-    _button_go_to_catalog_locator = '//*[contains(@resource-id, "empty_content_action_button")]'
+    _empty_content_locator = '//*[@resource-id="ru.dns.shop.android:id/empty_content_view"]'
+    _button_login_locator = '//*[@resource-id="ru.dns.shop.android:id/login_button"]'
+    _button_go_to_catalog_locator = '//*[@resource-id="ru.dns.shop.android:id/empty_content_action_button"]'
 
     def __init__(self):
-        super().__init__('//*[contains(@resource-id, "toolbar")]//*[contains(@text, "Избранное")]')
+        super().__init__('//*[@resource-id="ru.dns.shop.android:id/toolbar"]//*[@text="Избранное"]')
 
     @property
     def is_empty(self):

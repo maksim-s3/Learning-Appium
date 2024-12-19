@@ -8,12 +8,12 @@ logger = logging.getLogger(__name__)
 
 
 class ProductCardPage(BasePage):
-    _text_products_name_locator = '//*[contains(@resource-id, "product_title_text")]'
-    _text_current_price_locator = '//*[contains(@resource-id, "current_price_text")]'
-    _button_buy_pattern_locator = '//*[contains(@resource-id, "buy_button")][@text="{}"]'
+    _text_products_name_locator = '//*[@resource-id="ru.dns.shop.android:id/product_title_text"]'
+    _text_current_price_locator = '//*[@resource-id="ru.dns.shop.android:id/current_price_text"]'
+    _button_buy_pattern_locator = '//*[@resource-id="ru.dns.shop.android:id/buy_button"][@text="{}"]'
 
     def __init__(self):
-        super().__init__('//*[contains(@resource-id, "collapsing_toolbar_layout")]')
+        super().__init__('//*[@resource-id="ru.dns.shop.android:id/collapsing_toolbar_layout"]')
 
     @property
     def current_price(self):

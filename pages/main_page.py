@@ -7,11 +7,12 @@ logger = logging.getLogger(__name__)
 
 
 class MainPage(BasePage):
-    _text_permission_locator = '//*[contains(@resource-id, "permission_message")]'
-    _text_current_selected_city_locator = '//*[contains(@resource-id, "change_current_settlement_button")]'
+    _text_permission_locator = '//*[@resource-id="ru.dns.shop.android:id/permission_message"]'
+    _text_current_selected_city_locator = '//*[@resource-id="ru.dns.shop.android:id/change_current_settlement_button"]'
 
     def __init__(self):
-        super().__init__('//*[contains(@resource-id, "app_bar")]//*[contains(@resource-id, "logo_image")]')
+        super().__init__('//*[@resource-id="ru.dns.shop.android:id/app_bar"]'
+                         '//*[@resource-id="ru.dns.shop.android:id/logo_image"]')
 
     @property
     def current_selected_city(self):

@@ -8,14 +8,14 @@ logger = logging.getLogger(__name__)
 
 
 class NavigationPage(BasePage):
-    _button_home_locator = '//*[contains(@resource-id, "nav_home")]'
-    _button_outlets_locator = '//*[contains(@resource-id, "nav_outlets")]'
-    _button_catalog_locator = '//*[contains(@resource-id, "nav_catalog")]'
-    _button_cart_locator = '//*[contains(@resource-id, "nav_cart")]'
-    _button_profile_locator = '//*[contains(@resource-id, "nav_profile")]'
+    _button_home_locator = '//*[@resource-id="ru.dns.shop.android:id/nav_home"]'
+    _button_outlets_locator = '//*[@resource-id="ru.dns.shop.android:id/nav_outlets"]'
+    _button_catalog_locator = '//*[@resource-id="ru.dns.shop.android:id/nav_catalog"]'
+    _button_cart_locator = '//*[@resource-id="ru.dns.shop.android:id/nav_cart"]'
+    _button_profile_locator = '//*[@resource-id="ru.dns.shop.android:id/nav_profile"]'
 
     def __init__(self):
-        super().__init__('//*[contains(@resource-id, "navigation_bar_item_icon_view")]')
+        super().__init__('//*[@resource-id="ru.dns.shop.android:id/navigation_bar_item_icon_view"]')
 
     @property
     def number_items_in_cart(self):

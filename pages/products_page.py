@@ -7,13 +7,13 @@ logger = logging.getLogger(__name__)
 
 
 class ProductsPage(BasePage):
-    _button_filters_locator = '//*[contains(@resource-id, "filter_button")]'
-    _text_products_name_locator = '//*[contains(@resource-id, "product_title_text")]'
-    _text_products_price_locator = '//*[contains(@resource-id, "current_price_text")]'
-    _text_current_catogory_locator = '//*[contains(@resource-id, "toolbar")]//android.widget.TextView'
+    _button_filters_locator = '//*[@resource-id="ru.dns.shop.android:id/filter_button"]'
+    _text_products_name_locator = '//*[@resource-id="ru.dns.shop.android:id/product_title_text"]'
+    _text_products_price_locator = '//*[@resource-id="ru.dns.shop.android:id/current_price_text"]'
+    _text_current_catogory_locator = '//*[@resource-id="ru.dns.shop.android:id/toolbar"]//android.widget.TextView'
 
     def __init__(self):
-        super().__init__('//*[contains(@resource-id, "filter_list")]')
+        super().__init__('//*[@resource-id="ru.dns.shop.android:id/filter_list"]')
 
     @property
     def current_category(self):

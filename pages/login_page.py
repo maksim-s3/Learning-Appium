@@ -7,10 +7,10 @@ logger = logging.getLogger(__name__)
 
 
 class LoginPage(BasePage):
-    _button_skip_auth_locator = '//*[contains(@resource-id, "skip_auth_button")]'
+    _button_skip_auth_locator = '//*[@resource-id="ru.dns.shop.android:id/skip_auth_button"]'
 
     def __init__(self):
-        super().__init__('//*[contains(@resource-id, "skip_auth_button")]')
+        super().__init__('//*[@resource-id="ru.dns.shop.android:id/skip_auth_button"]')
 
     def skip_auth_click(self):
         logger.info('Кликнуть на кнопке "Войти позже""')

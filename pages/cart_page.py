@@ -8,21 +8,21 @@ logger = logging.getLogger(__name__)
 
 
 class CartPage(BasePage):
-    _empty_content_locator = '//*[contains(@resource-id, "empty_content_view")]'
-    _button_go_to_catalog_locator = '//*[contains(@resource-id, "empty_content_action_button")]'
-    _text_products_name_locator = '//*[contains(@resource-id, "product_title_text")]'
-    _text_product_name_pattern_locator = '//*[contains(@resource-id, "product_title_text")][@text, "{}"]'
+    _empty_content_locator = '//*[@resource-id="ru.dns.shop.android:id/empty_content_view"]'
+    _button_go_to_catalog_locator = '//*[@resource-id="ru.dns.shop.android:id/empty_content_action_button"]'
+    _text_products_name_locator = '//*[@resource-id="ru.dns.shop.android:id/product_title_text"]'
+    _text_product_name_pattern_locator = '//*[@resource-id="ru.dns.shop.android:id/product_title_text"][@text, "{}"]'
     _text_product_price_with_name_locator = ('//*[contains(@text, "{}")]/following-sibling::*'
-                                             '//*[contains(@resource-id, "cart_item_sum_view_current_sum_text")]')
+                                             '//*[@resource-id="ru.dns.shop.android:id/cart_item_sum_view_current_sum_text"]')
     _button_delete_product_with_name_locator = ('//*[contains(@text, "{}")]/following-sibling::*'
-                                                '//*[contains(@resource-id, "decrement_button")]')
-    _text_total_sum_cart_locator = '//*[contains(@resource-id, "total_sum_text")]'
-    _button_confirm_delete_locator = '//*[contains(@resource-id, "positive_button")]'
-    _dialog_delete_product_locator = '//*[contains(@resource-id, "design_bottom_sheet")]'
-    _snack_bar_locator = '//*[contains(@resource-id, "snackbar_text")]'
+                                                '//*[@resource-id="ru.dns.shop.android:id/decrement_button"]')
+    _text_total_sum_cart_locator = '//*[@resource-id="ru.dns.shop.android:id/total_sum_text"]'
+    _button_confirm_delete_locator = '//*[@resource-id="ru.dns.shop.android:id/positive_button"]'
+    _dialog_delete_product_locator = '//*[@resource-id="ru.dns.shop.android:id/design_bottom_sheet"]'
+    _snack_bar_locator = '//*[@resource-id="ru.dns.shop.android:id/snackbar_text"]'
 
     def __init__(self):
-        super().__init__('//*[contains(@resource-id, "title_text")][contains(@text, "Корзина")]')
+        super().__init__('//*[@resource-id="ru.dns.shop.android:id/title_text"][@text="Корзина"]')
 
     @property
     def is_empty(self):

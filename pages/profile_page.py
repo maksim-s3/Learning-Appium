@@ -7,12 +7,12 @@ logger = logging.getLogger(__name__)
 
 
 class ProfilePage(BasePage):
-    _button_login_locator = '//*[contains(@resource-id, "login_button")]'
-    _button_favourites_locator = '//*[contains(@resource-id, "button_text")][@text="Избранное"]'
-    _text_selected_city_locator = '//*[contains(@resource-id, "settlement_text")]'
+    _button_login_locator = '//*[@resource-id="ru.dns.shop.android:id/login_button"]'
+    _button_favourites_locator = '//*[@resource-id="ru.dns.shop.android:id/button_text"][@text="Избранное"]'
+    _text_selected_city_locator = '//*[@resource-id="ru.dns.shop.android:id/settlement_text"]'
 
     def __init__(self):
-        super().__init__('//*[contains(@resource-id, "toolbar")]//*[contains(@text, "Профиль")]')
+        super().__init__('//*[@resource-id="ru.dns.shop.android:id/toolbar"]//*[@text="Профиль"]')
 
     @property
     def button_login_is_displayed(self):

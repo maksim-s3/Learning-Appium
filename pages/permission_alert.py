@@ -7,12 +7,11 @@ logger = logging.getLogger(__name__)
 
 
 class PermissionAlert(BasePage):
-    _button_allow_locator = '//*[contains(@resource-id, "permission_allow_button")]'
-    _button_while_using_locator = '//*[contains(@resource-id, "permission_allow_foreground_only_button")]'
-    _button_only_this_time_locator = '//*[contains(@resource-id, "permission_allow_one_time_button")]'
+    _button_allow_locator = '//*[@resource-id="com.android.permissioncontroller:id/permission_allow_button"]'
+    _button_while_using_locator = '//*[@resource-id="com.android.permissioncontroller:id/permission_allow_foreground_only_button"]'
 
     def __init__(self):
-        super().__init__('//*[contains(@resource-id, "permission_message")]')
+        super().__init__('//*[@resource-id="com.android.permissioncontroller:id/grant_dialog"]')
 
     def wait_request_permission(self):
         logger.info('Ожидание запроса разрешения на экране')

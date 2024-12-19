@@ -7,14 +7,14 @@ logger = logging.getLogger(__name__)
 
 
 class SelectCityPage(BasePage):
-    _text_current_city_locator = '//*[contains(@resource-id, "current_settlement_text")]'
-    _button_change_city = '//*[contains(@resource-id, "change_current_settlement_button")]'
-    _button_confirm_locator = '//*[contains(@resource-id, "confirm_current_settlement_button")]'
-    _input_search_city = '//*[contains(@resource-id, "search_edit")]'
-    _text_city_item_pattern_locator = '//*[contains(@resource-id, "settlement_name_text")][@text="{}"]'
+    _text_current_city_locator = '//*[@resource-id="ru.dns.shop.android:id/current_settlement_text"]'
+    _button_change_city = '//*[@resource-id="ru.dns.shop.android:id/change_current_settlement_button"]'
+    _button_confirm_locator = '//*[@resource-id="ru.dns.shop.android:id/confirm_current_settlement_button"]'
+    _input_search_city = '//*[@resource-id="ru.dns.shop.android:id/search_edit"]'
+    _text_city_item_pattern_locator = '//*[@resource-id="ru.dns.shop.android:id/settlement_name_text"][@text="{}"]'
 
     def __init__(self):
-        super().__init__('//*[contains(@resource-id, "current_settlement_title_text")]')
+        super().__init__('//*[@resource-id="ru.dns.shop.android:id/current_settlement_title_text"]')
 
     @property
     def current_city(self):
