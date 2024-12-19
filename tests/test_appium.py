@@ -1,8 +1,14 @@
+import logging
+import time
+
 import allure
 import pytest
 
 import pages
 from driver import AppiumDriver
+from selenium.webdriver.common.by import By
+
+logger = logging.getLogger(__name__)
 
 
 @pytest.fixture(scope="session")
@@ -37,13 +43,19 @@ def application(driver, request):
     yield
 
 
+@pytest.fixture(scope="session")
+def grant_all_permissions(driver):
+    # Выдаем все разрешения приложению
+    driver.execute_script("mobile: changePermissions", {'permissions': 'all', 'appPackage': "ru.dns.shop.android"})
+
+
 class TestAppium:
-    def test_first_run_application(self, clear_app, application):
+    def test_first_run_application(self, clear_app, grant_all_permissions, application):
         with allure.step("Выбрать город из параметра"):
             city = "Уфа"
             assert pages.select_city_page.is_open
             pages.select_city_page.change_city_click()
-            pages.permission_alert.while_using_the_app_click()
+            # pages.permission_alert.while_using_the_app_click()
             pages.select_city_page.select_city(city)
             assert pages.select_city_page.current_city == f"{city}?"
             pages.select_city_page.confirm_click()
@@ -51,10 +63,10 @@ class TestAppium:
 
         with allure.step('Нажать "Войти позже"'):
             pages.login_page.skip_auth_click()
-            pages.permission_alert.wait_request_permission()
+            # pages.permission_alert.wait_request_permission()
 
         with allure.step("Разрешить отправку уведомлений"):
-            pages.permission_alert.allow_click()
+            # pages.permission_alert.allow_click()
             assert pages.main_page.is_open
             assert pages.main_page.current_selected_city == city
 
@@ -132,9 +144,3 @@ class TestAppium:
             assert not pages.cart_page.find_product_in_cart(product_name)
             pages.cart_page.wait_snack_bar()
             assert pages.cart_page.is_empty
-
-
-
-
-
-
