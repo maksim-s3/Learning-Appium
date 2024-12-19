@@ -73,6 +73,7 @@ class TestAppium:
             # pages.permission_alert.while_using_the_app_click()
             pages.select_city_page.select_city(city)
             assert pages.select_city_page.current_city == f"{city}?"
+            pages.select_city_page.take_screenshot("Выбрать город из параметра")
             pages.select_city_page.confirm_click()
             assert pages.login_page.is_open
 
@@ -84,23 +85,27 @@ class TestAppium:
             # pages.permission_alert.allow_click()
             assert pages.main_page.is_open
             assert pages.main_page.current_selected_city == city
+            pages.main_page.take_screenshot(f"Текущий город выбран {city}")
 
         with allure.step("Нажать на иконку с корзиной в нижнем меню"):
             pages.navigation.open_cart()
             assert pages.cart_page.is_open
             assert pages.cart_page.is_empty
             assert pages.cart_page.button_go_to_catalog_is_displayed
+            pages.cart_page.take_screenshot("Кнопка каталога доступна")
 
         with allure.step("Перейти в профиль"):
             pages.navigation.open_profile()
             assert pages.profile_page.is_open
             assert pages.profile_page.button_login_is_displayed
             assert pages.profile_page.selected_city == city
+            pages.profile_page.take_screenshot(f"Текущий город выбран {city}")
 
         with allure.step('Нажать на кнопку "Избранное"'):
             pages.profile_page.button_favourites_click()
             assert pages.favourites_page.is_open
             assert pages.favourites_page.is_empty
+            pages.favourites_page.take_screenshot(f"Страница избранного пуста")
             assert pages.favourites_page.button_login_is_displayed
             assert pages.favourites_page.button_go_to_catalog_is_displayed
 
