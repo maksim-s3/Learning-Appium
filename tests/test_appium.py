@@ -173,3 +173,12 @@ class TestAppium:
 
         driver.activate_app("ru.dns.shop.android")
         assert pages.main_page.is_open
+
+    def test_rotate_display(self, driver, chrome_application):
+        logger.info(f"Текущая ориентация: {driver.orientation}")
+        driver.orientation = 'LANDSCAPE'
+        assert driver.orientation == 'LANDSCAPE'
+
+        logger.info(f"Текущая ориентация: {driver.orientation}")
+        driver.orientation = 'PORTRAIT'
+        assert driver.orientation == 'PORTRAIT'
