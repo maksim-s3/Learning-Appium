@@ -7,6 +7,7 @@ import pytest
 import pages
 from driver import AppiumDriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 
 logger = logging.getLogger(__name__)
 
@@ -168,12 +169,19 @@ class TestAppium:
     def test_switch_between_applications(self, driver, application, chrome_application):
         driver.activate_app("ru.dns.shop.android")
         assert pages.main_page.is_open
+        product_name = pages.main_page.get_name_product_item_by_index(0)
+        driver.set_clipboard_text(product_name)
+        logger.info(f"Скопирован текст в буфер обмена '{product_name}'")
         driver.background_app(-1)
 
         driver.activate_app("com.android.chrome")
         time.sleep(5)
         search_box = driver.find_element(By.XPATH, "//*[contains(@resource-id, 'search_box_text')]")
         assert search_box.is_displayed()
+        search_box.send_keys(driver.get_clipboard_text())
+        logger.info(f"Вставлен текст из буфера обмена '{driver.get_clipboard_text()}'")
+        driver.keyevent(66)
+        time.sleep(5)
         driver.background_app(-1)
 
         driver.activate_app("ru.dns.shop.android")
