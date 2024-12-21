@@ -8,6 +8,7 @@ import pages
 from driver import AppiumDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from appium.webdriver.connectiontype import ConnectionType
 
 logger = logging.getLogger(__name__)
 
@@ -195,3 +196,25 @@ class TestAppium:
         logger.info(f"Текущая ориентация: {driver.orientation}")
         driver.orientation = 'PORTRAIT'
         assert driver.orientation == 'PORTRAIT'
+
+    def test_toggle(self, driver):
+        logger.info("Включаем режим полета")
+        driver.set_network_connection(ConnectionType.AIRPLANE_MODE)
+        assert driver.network_connection == ConnectionType.NO_CONNECTION
+
+        logger.info("Включаем toggle WI-FI")
+        driver.toggle_wifi()
+        time.sleep(10)
+        assert driver.network_connection == ConnectionType.WIFI_ONLY
+
+        logger.info("Выключаем toggle WI-FI")
+        driver.toggle_wifi()
+        assert driver.network_connection == ConnectionType.NO_CONNECTION
+
+        logger.info("Включаем toggle DATA")
+        driver.set_network_connection(ConnectionType.DATA_ONLY)
+        time.sleep(10)
+        assert driver.network_connection == ConnectionType.DATA_ONLY
+
+        logger.info("Переключаем toggle Геолокации")
+        driver.toggle_location_services()
