@@ -58,3 +58,9 @@ class BasePage(ABC):
             logger.info(f"Скролим список элементов от {elements[-1].text} до {elements[0].text}")
             self._driver.scroll(elements[-1], elements[0])
 
+    def take_screenshot(self, filename: str = None):
+        if not filename:
+            filename = self.__class__.__name__
+        logger.info(f"Сохранение скриншота '{filename}.png'")
+        self._driver.save_screenshot(f"{filename}.png")
+

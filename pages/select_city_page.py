@@ -12,6 +12,7 @@ class SelectCityPage(BasePage):
     _button_confirm_locator = '//*[@resource-id="ru.dns.shop.android:id/confirm_current_settlement_button"]'
     _input_search_city = '//*[@resource-id="ru.dns.shop.android:id/search_edit"]'
     _text_city_item_pattern_locator = '//*[@resource-id="ru.dns.shop.android:id/settlement_name_text"][@text="{}"]'
+    _list_of_cities_locator = '//*[@resource-id="ru.dns.shop.android:id/settlement_name_text"]'
 
     def __init__(self):
         super().__init__('//*[@resource-id="ru.dns.shop.android:id/current_settlement_title_text"]')
@@ -27,6 +28,7 @@ class SelectCityPage(BasePage):
 
     def select_city(self, city: str):
         logger.info(f'Выбрать город {city}')
+        self._wait.until(lambda e: self._driver.find_element(By.XPATH, self._list_of_cities_locator))
         input_element = self._driver.find_element(By.XPATH, self._input_search_city)
         input_element.click()
         input_element.send_keys(city)

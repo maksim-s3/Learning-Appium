@@ -4,6 +4,7 @@ from appium.options.android import UiAutomator2Options
 capabilities = dict(
     platformName='Android',
     automationName='uiautomator2',
+    # autoGrantPermissions=True,
 )
 
 appium_server_url = 'http://localhost:4723'
